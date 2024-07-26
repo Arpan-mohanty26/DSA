@@ -1,0 +1,76 @@
+// Book class
+class Book {
+    String title;
+    String author;
+    int year;
+
+    public Book(String title, String author, int year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + ", Author: " + author + ", Year: " + year;
+    }
+}
+
+// Library class
+class Library {
+    ArrayList<Book> books;
+
+    public Library() {
+        books = new ArrayList<>();
+    }
+
+    // Add a book to the library
+    void addBook(String title, String author, int year) {
+        books.add(new Book(title, author, year));
+    }
+
+    // Search for a book by title
+    Book searchBook(String title) {
+        for (Book book : books) {
+            if (book.title.equalsIgnoreCase(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    // Display all books
+    void displayBooks() {
+        for (Book book : books) {
+            System.out.println(book);
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        Library library = new Library();
+
+        library.addBook("To Kill a Mockingbird", "Harper Lee", 1960);
+        library.addBook("1984", "George Orwell", 1949);
+        library.addBook("The Great Gatsby", "F. Scott Fitzgerald", 1925);
+
+        System.out.println("All books in the library:");
+        library.displayBooks();
+
+        System.out.println("\nSearching for '1984':");
+        Book book = library.searchBook("1984");
+        if (book != null) {
+            System.out.println("Book found: " + book);
+        } else {
+            System.out.println("Book not found");
+        }
+
+        System.out.println("\nSearching for 'Moby Dick':");
+        book = library.searchBook("Moby Dick");
+        if (book != null) {
+            System.out.println("Book found: " + book);
+        } else {
+            System.out.println("Book not found");
+        }
+    }
+}
